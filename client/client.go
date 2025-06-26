@@ -114,7 +114,7 @@ func NewClient(c *Config) (*Client, error) {
 		}
 		//certificate verification config
 		if c.TLS.SkipVerify {
-			client.Infof("TLS verification disabled")
+			client.Infof("Verificacion TLS desactivada")
 			tc.InsecureSkipVerify = true
 		} else if c.TLS.CA != "" {
 			rootCAs := x509.NewCertPool()
@@ -246,7 +246,7 @@ func (c *Client) Start(ctx context.Context) error {
 	if c.proxyURL != nil {
 		via = " via " + c.proxyURL.String()
 	}
-	c.Infof("Connecting to %s%s\n", c.server, via)
+	c.Infof("Conectando con %s%s\n", c.server, via)
 	//connect to chisel server
 	eg.Go(func() error {
 		return c.connectionLoop(ctx)

@@ -35,28 +35,28 @@ func (c *Client) connectionLoop(ctx context.Context) error {
 		}
 		//show error message and attempt counts (excluding disconnects)
 		if err != nil && err != io.EOF {
-			msg := fmt.Sprintf("Connection error: %s", err)
+			msg := fmt.Sprintf("Error de conexión: %s", err)
 			if attempt > 0 {
 				maxAttemptVal := fmt.Sprint(maxAttempt)
 				if maxAttempt < 0 {
 					maxAttemptVal = "unlimited"
 				}
-				msg += fmt.Sprintf(" (Attempt: %d/%s)", attempt, maxAttemptVal)
+				msg += fmt.Sprintf(" (Intento: %d/%s)", attempt, maxAttemptVal)
 			}
 			c.Infof(msg)
 		}
 		//give up?
 		if maxAttempt >= 0 && attempt >= maxAttempt {
-			c.Infof("Give up")
+			c.Infof("Me rindo...")
 			break
 		}
 		d := b.Duration()
-		c.Infof("Retrying in %s...", d)
+		c.Infof("Reintentando en %s...", d)
 		select {
 		case <-cos.AfterSignal(d):
 			continue //retry now
 		case <-ctx.Done():
-			c.Infof("Cancelled")
+			c.Infof("Cancelado")
 			return nil
 		}
 	}
@@ -69,7 +69,7 @@ func (c *Client) connectionOnce(ctx context.Context) (connected bool, err error)
 	//already closed?
 	select {
 	case <-ctx.Done():
-		return false, errors.New("Cancelled")
+		return false, errors.New("Cancelado")
 	default:
 		//still open
 	}
@@ -100,8 +100,8 @@ func (c *Client) connectionOnce(ctx context.Context) (connected bool, err error)
 	sshConn, chans, reqs, err := ssh.NewClientConn(conn, "", c.sshConfig)
 	if err != nil {
 		e := err.Error()
-		if strings.Contains(e, "unable to authenticate") {
-			c.Infof("Authentication failed")
+		if strings.Contains(e, "imposible autenticarse") {
+			c.Infof("Autenticacion fallida")
 			c.Debugf(e)
 		} else {
 			c.Infof(e)
@@ -125,10 +125,10 @@ func (c *Client) connectionOnce(ctx context.Context) (connected bool, err error)
 	if len(configerr) > 0 {
 		return false, errors.New(string(configerr))
 	}
-	c.Infof("Connected (Latency %s)", time.Since(t0))
+	c.Infof("Conectado (Latencia %s)", time.Since(t0))
 	//connected, handover ssh connection for tunnel to use, and block
 	err = c.tunnel.BindSSH(ctx, sshConn, reqs, chans)
-	c.Infof("Disconnected")
+	c.Infof("Deconectado")
 	connected = time.Since(t0) > 5*time.Second
 	return connected, err
 }
