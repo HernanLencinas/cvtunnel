@@ -54,7 +54,6 @@ func New(c Config) *Tunnel {
 		Config: c,
 	}
 	t.activatingConn.Add(1)
-	//setup socks server (not listening on any port!)
 	extra := ""
 	if c.Socks {
 		sl := log.New(io.Discard, "", 0)

@@ -54,7 +54,7 @@ func (s *Server) listener(host, port string) (net.Listener, error) {
 		l = tls.NewListener(l, tlsConf)
 	}
 	if err == nil {
-		s.Infof("Listening on %s://%s:%s%s", proto, host, port, extra)
+		s.Infof("Escuchando en %s://%s:%s%s", proto, host, port, extra)
 	}
 	return l, nil
 }
