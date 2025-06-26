@@ -16,10 +16,13 @@ Follow these steps to compile the project, create a docker image and setting up 
 docker run -d --name cloudvalley_tunnel \
   --network cloudvalley_network \
   --restart unless-stopped \
-  :latest \
+  cvtunnel:latest \
   server --port 8000 --reverse --auth cloudvalley:developer910
 ```
 
-
+docker run -d --name cloudvalley_tunnel \
+  --restart unless-stopped \
+  cvtunnel:latest \
+  server --port 8000 --reverse --auth cloudvalley:developer910
 
 

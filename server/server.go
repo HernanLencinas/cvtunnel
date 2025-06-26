@@ -138,7 +138,7 @@ func NewServer(c *Config) (*Server, error) {
 	}
 	//print when reverse tunnelling is enabled
 	if c.Reverse {
-		server.Infof("Reverse tunnelling enabled")
+		server.Infof("Tunel reverso activado")
 	}
 	return server, nil
 }
@@ -159,10 +159,10 @@ func (s *Server) Start(host, port string) error {
 func (s *Server) StartContext(ctx context.Context, host, port string) error {
 	//s.Infof("Fingerprint %s", s.fingerprint)
 	if s.users.Len() > 0 {
-		s.Infof("User authentication enabled")
+		s.Infof("Autenticacion activada")
 	}
 	if s.reverseProxy != nil {
-		s.Infof("Reverse proxy enabled")
+		s.Infof("Proxy reverso activado")
 	}
 	l, err := s.listener(host, port)
 	if err != nil {
