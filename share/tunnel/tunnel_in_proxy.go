@@ -48,23 +48,23 @@ func (p *Proxy) listen() error {
 	} else if p.remote.LocalProto == "tcp" {
 		addr, err := net.ResolveTCPAddr("tcp", p.remote.LocalHost+":"+p.remote.LocalPort)
 		if err != nil {
-			return p.Errorf("resolve: %s", err)
+			return p.Errorf("resuelve: %s", err)
 		}
 		l, err := net.ListenTCP("tcp", addr)
 		if err != nil {
 			return p.Errorf("tcp: %s", err)
 		}
-		p.Infof("Listening")
+		p.Infof("Escuchando")
 		p.tcp = l
 	} else if p.remote.LocalProto == "udp" {
 		l, err := listenUDP(p.Logger, p.sshTun, p.remote)
 		if err != nil {
 			return err
 		}
-		p.Infof("Listening")
+		p.Infof("Escuchando")
 		p.udp = l
 	} else {
-		return p.Errorf("unknown local proto")
+		return p.Errorf("puerto local desconocido")
 	}
 	return nil
 }
@@ -83,7 +83,7 @@ func (p *Proxy) Run(ctx context.Context) error {
 }
 
 func (p *Proxy) runStdio(ctx context.Context) error {
-	defer p.Infof("Closed")
+	defer p.Infof("Cerrado")
 	for {
 		p.pipeRemote(ctx, cio.Stdio)
 		select {

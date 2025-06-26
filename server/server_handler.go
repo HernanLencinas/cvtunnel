@@ -50,7 +50,7 @@ func (s *Server) handleClientHandler(w http.ResponseWriter, r *http.Request) {
 // handleWebsocket is responsible for handling the websocket connection
 func (s *Server) handleWebsocket(w http.ResponseWriter, req *http.Request) {
 	id := atomic.AddInt32(&s.sessCount, 1)
-	l := s.Fork("session#%d", id)
+	l := s.Fork("sesion#%d", id)
 	wsConn, err := upgrader.Upgrade(w, req, nil)
 	if err != nil {
 		l.Debugf("Failed to upgrade (%s)", err)
@@ -107,7 +107,7 @@ func (s *Server) handleWebsocket(w http.ResponseWriter, req *http.Request) {
 	}
 	sv := strings.TrimPrefix(chshare.BuildVersion, "v")
 	if cv != sv {
-		l.Infof("Client version (%s) differs from server version (%s)", cv, sv)
+		l.Infof("La version del cliente (%s) es diferente a la version del servidor (%s)", cv, sv)
 	}
 	//validate remotes
 	for _, r := range c.Remotes {
@@ -116,7 +116,7 @@ func (s *Server) handleWebsocket(w http.ResponseWriter, req *http.Request) {
 		if user != nil {
 			addr := r.UserAddr()
 			if !user.HasAccess(addr) {
-				failed(s.Errorf("access to '%s' denied", addr))
+				failed(s.Errorf("acceso a '%s' denegado", addr))
 				return
 			}
 		}
