@@ -5,5 +5,5 @@ WORKDIR /go/github.com/HernanLencinas/cvtunnel
 COPY . ./
 RUN go mod download
 RUN go build -o ./cvtun main.go
-EXPOSE 8443
-CMD ["./cvtun", "server"]
+EXPOSE 8000
+ENTRYPOINT ["cvtun"]
