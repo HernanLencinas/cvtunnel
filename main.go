@@ -469,8 +469,22 @@ func client(args []string) {
 	if len(args) < 2 {
 		log.Fatalf("A server and least one remote is required")
 	}
+
 	config.Server = args[0]
 	config.Remotes = args[1:]
+
+	connString := strings.Split(config.Remotes[0], ":")
+	fmt.Println("Información de Conexión:")
+	if len(connString) == 3 {
+		fmt.Printf(" ↳ Local IP/Puerto: %s\n", "localhost:"+connString[0])
+		fmt.Printf(" ↳ Remoto IP/Puerto: %s\n\n", connString[1]+":"+connString[2])
+	} else if len(connString) >= 4 {
+		fmt.Printf(" ↳ Local IP/Puerto: %s\n", connString[0]+":"+connString[1])
+		fmt.Printf(" ↳ Remoto IP/Puerto: %s\n\n", connString[2]+":"+connString[3])
+	} else {
+		fmt.Println("Formato de remoto inválido. Se esperaba al menos 3 o 4 partes separadas por ':'")
+	}
+
 	//default auth
 	if config.Auth == "" {
 		config.Auth = os.Getenv("AUTH")
@@ -502,4 +516,5 @@ func client(args []string) {
 	if err := c.Wait(); err != nil {
 		log.Fatal(err)
 	}
+
 }
