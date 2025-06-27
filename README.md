@@ -9,20 +9,13 @@ Follow these steps to compile the project, create a docker image and setting up 
 
 2. Compile the project and create a new image. Start the container with the generated image..
 ```
-% docker build -t cvtunnel:latest .
+% docker build -t telecomcloudvalley/cvtunnel:latest .
 ```
 
 ```
 docker run -d --name cloudvalley_tunnel \
   --network cloudvalley_network \
   --restart unless-stopped \
-  cvtunnel:latest \
+  registry.cloudvalley.telecom.com.ar/cvtunnel:latest \
   server --port 8000 --reverse --auth cloudvalley:developer910
 ```
-
-docker run -d --name cloudvalley_tunnel \
-  --restart unless-stopped \
-  cvtunnel:latest \
-  server --port 8000 --reverse --auth cloudvalley:developer910
-
-

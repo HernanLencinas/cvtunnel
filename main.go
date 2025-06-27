@@ -442,6 +442,7 @@ var clientHelp = banner + `
 `
 
 func client(args []string) {
+	fmt.Print(banner)
 	flags := flag.NewFlagSet("client", flag.ContinueOnError)
 	config := cvclient.Config{Headers: http.Header{}}
 	flags.StringVar(&config.Fingerprint, "fingerprint", "", "")
