@@ -127,7 +127,7 @@ func (u *UserIndex) loadUserIndex() error {
 	}
 	b, err := os.ReadFile(u.configFile)
 	if err != nil {
-		return fmt.Errorf("Failed to read auth file: %s, error: %s", u.configFile, err)
+		return fmt.Errorf("failed to read auth file: %s, error: %s", u.configFile, err)
 	}
 	var raw map[string][]string
 	if err := json.Unmarshal(b, &raw); err != nil {
@@ -138,7 +138,7 @@ func (u *UserIndex) loadUserIndex() error {
 		user := &User{}
 		user.Name, user.Pass = ParseAuth(auth)
 		if user.Name == "" {
-			return errors.New("Invalid user:pass string")
+			return errors.New("invalid user:pass string")
 		}
 		for _, r := range remotes {
 			if r == "" || r == "*" {
@@ -146,7 +146,7 @@ func (u *UserIndex) loadUserIndex() error {
 			} else {
 				re, err := regexp.Compile(r)
 				if err != nil {
-					return errors.New("Invalid address regex")
+					return errors.New("invalid address regex")
 				}
 				user.Addrs = append(user.Addrs, re)
 			}

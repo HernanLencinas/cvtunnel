@@ -198,15 +198,12 @@ func (s *Server) authUser(c ssh.ConnMetadata, password []byte) (*ssh.Permissions
 	user, found := s.users.Get(n)
 	if !found || user.Pass != string(password) {
 		s.Debugf("Login failed for user: %s", n)
-		return nil, errors.New("Invalid authentication for username: %s")
+		return nil, errors.New("invalid authentication for username: %s")
 	}
-	// insert the user session map
-	// TODO this should probably have a lock on it given the map isn't thread-safe
 	s.sessions.Set(string(c.SessionID()), user)
 	return nil, nil
 }
 
-// AddUser adds a new user into the server user index
 func (s *Server) AddUser(user, pass string, addrs ...string) error {
 	authorizedAddrs := []*regexp.Regexp{}
 	for _, addr := range addrs {
@@ -224,13 +221,10 @@ func (s *Server) AddUser(user, pass string, addrs ...string) error {
 	return nil
 }
 
-// DeleteUser removes a user from the server user index
 func (s *Server) DeleteUser(user string) {
 	s.users.Del(user)
 }
 
-// ResetUsers in the server user index.
-// Use nil to remove all.
 func (s *Server) ResetUsers(users []*settings.User) {
 	s.users.Reset(users)
 }
