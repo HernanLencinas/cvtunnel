@@ -21,7 +21,7 @@ build_for_platform() {
     mkdir -p "$(dirname "$output_path")"
 
     # Compilar
-    if env GOOS="$os" GOARCH="$arch" go build -o "$output_path"; then
+    if env GOOS="$os" GOARCH="$arch" go build -ldflags='-s -w' -o "$output_path"; then
         echo "✅ Build successful: $output_path"
     else
         echo "❌ Build failed for ${os}/${arch}" >&2

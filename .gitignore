@@ -1,7 +1,6 @@
 dist/
 *.swp
 .idea/
-chisel
 bin/
 release/
 tmp/

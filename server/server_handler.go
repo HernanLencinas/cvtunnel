@@ -14,9 +14,7 @@ import (
 	"golang.org/x/sync/errgroup"
 )
 
-// handleClientHandler is the main http websocket handler for the chisel server
 func (s *Server) handleClientHandler(w http.ResponseWriter, r *http.Request) {
-	//websockets upgrade AND has chisel prefix
 	upgrade := strings.ToLower(r.Header.Get("Upgrade"))
 	protocol := r.Header.Get("Sec-WebSocket-Protocol")
 	if upgrade == "websocket" {
@@ -75,7 +73,6 @@ func (s *Server) handleWebsocket(w http.ResponseWriter, req *http.Request) {
 		user = u
 		s.sessions.Del(sid)
 	}
-	// chisel server handshake (reverse of client handshake)
 	// verify configuration
 	l.Debugf("Verifying configuration")
 	// wait for request, with timeout

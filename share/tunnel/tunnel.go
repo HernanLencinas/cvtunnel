@@ -27,13 +27,6 @@ type Config struct {
 	KeepAlive time.Duration
 }
 
-// Tunnel represents an SSH tunnel with proxy capabilities.
-// Both chisel client and server are Tunnels.
-// chisel client has a single set of remotes, whereas
-// chisel server has multiple sets of remotes (one set per client).
-// Each remote has a 1:1 mapping to a proxy.
-// Proxies listen, send data over ssh, and the other end of the ssh connection
-// communicates with the endpoint and returns the response.
 type Tunnel struct {
 	Config
 	//ssh connection

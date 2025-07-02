@@ -138,7 +138,7 @@ func (p *Proxy) pipeRemote(ctx context.Context, src io.ReadWriteCloser) {
 		return
 	}
 	//ssh request for tcp connection for this proxy's remote
-	dst, reqs, err := sshConn.OpenChannel("chisel", []byte(p.remote.Remote()))
+	dst, reqs, err := sshConn.OpenChannel("cvt", []byte(p.remote.Remote()))
 	if err != nil {
 		l.Infof("Stream error: %s", err)
 		return

@@ -165,7 +165,7 @@ func (u *udpListener) getUDPChan(ctx context.Context) (*udpChannel, error) {
 	//ssh request for udp packets for this proxy's remote,
 	//just "udp" since the remote address is sent with each packet
 	dstAddr := u.remote.Remote() + "/udp"
-	rwc, reqs, err := sshConn.OpenChannel("chisel", []byte(dstAddr))
+	rwc, reqs, err := sshConn.OpenChannel("cvt", []byte(dstAddr))
 	if err != nil {
 		return nil, fmt.Errorf("ssh-chan error: %s", err)
 	}
