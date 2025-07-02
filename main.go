@@ -76,11 +76,6 @@ func main() {
 	}
 }
 
-var commonHelp = `
-    --help, This help text
-
-`
-
 func generatePidFile() {
 	pid := []byte(strconv.Itoa(os.Getpid()))
 	if err := os.WriteFile("cvtunnel.pid", pid, 0644); err != nil {
@@ -302,7 +297,7 @@ func (flag *headerFlags) String() string {
 func (flag *headerFlags) Set(arg string) error {
 	index := strings.Index(arg, ":")
 	if index < 0 {
-		return fmt.Errorf(`Invalid header (%s). Should be in the format "HeaderName: HeaderContent"`, arg)
+		return fmt.Errorf(`invalid header (%s). Should be in the format "HeaderName: HeaderContent"`, arg)
 	}
 	if flag.Header == nil {
 		flag.Header = http.Header{}
@@ -485,11 +480,10 @@ func client(args []string) {
 		fmt.Println("Formato de remoto inválido. Se esperaba al menos 3 o 4 partes separadas por ':'")
 	}
 
-	//default auth
 	if config.Auth == "" {
 		config.Auth = os.Getenv("AUTH")
 	}
-	//move hostname onto headers
+
 	if *hostname != "" {
 		config.Headers.Set("Host", *hostname)
 		config.TLS.ServerName = *hostname
@@ -499,7 +493,6 @@ func client(args []string) {
 		config.TLS.ServerName = *sni
 	}
 
-	//ready
 	c, err := cvclient.NewClient(&config)
 	if err != nil {
 		log.Fatal(err)
