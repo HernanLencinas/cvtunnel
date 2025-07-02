@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/HernanLencinas/cvtunnel/share/cio"
-	"github.com/jpillora/sizestr"
+	"github.com/HernanLencinas/cvtunnel/share/sizestr"
 )
 
 // NewMeter to measure readers/writers

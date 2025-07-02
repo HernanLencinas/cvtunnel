@@ -9,11 +9,11 @@ import (
 	"time"
 
 	chshare "github.com/HernanLencinas/cvtunnel/share"
+	"github.com/HernanLencinas/cvtunnel/share/backoff"
 	"github.com/HernanLencinas/cvtunnel/share/cnet"
 	"github.com/HernanLencinas/cvtunnel/share/cos"
 	"github.com/HernanLencinas/cvtunnel/share/settings"
 	"github.com/gorilla/websocket"
-	"github.com/jpillora/backoff"
 	"golang.org/x/crypto/ssh"
 )
 

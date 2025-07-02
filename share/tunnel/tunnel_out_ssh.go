@@ -9,7 +9,7 @@ import (
 	"github.com/HernanLencinas/cvtunnel/share/cio"
 	"github.com/HernanLencinas/cvtunnel/share/cnet"
 	"github.com/HernanLencinas/cvtunnel/share/settings"
-	"github.com/jpillora/sizestr"
+	"github.com/HernanLencinas/cvtunnel/share/sizestr"
 	"golang.org/x/crypto/ssh"
 )
 
