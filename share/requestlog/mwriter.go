@@ -8,7 +8,7 @@ import (
 	"regexp"
 	"time"
 
-	"github.com/jpillora/sizestr"
+	"github.com/HernanLencinas/cvtunnel/share/sizestr"
 	"github.com/tomasen/realip"
 )
 

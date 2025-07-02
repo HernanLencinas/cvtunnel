@@ -17,7 +17,7 @@ import (
 	"github.com/HernanLencinas/cvtunnel/share/cnet"
 	"github.com/HernanLencinas/cvtunnel/share/settings"
 	"github.com/gorilla/websocket"
-	"github.com/jpillora/requestlog"
+
 	"golang.org/x/crypto/ssh"
 )
 
@@ -164,11 +164,11 @@ func (s *Server) StartContext(ctx context.Context, host, port string) error {
 		return err
 	}
 	h := http.Handler(http.HandlerFunc(s.handleClientHandler))
-	if s.Debug {
+	/* 	if s.Debug {
 		o := requestlog.DefaultOptions
 		o.TrustProxy = true
 		h = requestlog.WrapWith(h, o)
-	}
+	} */
 	return s.httpServer.GoServe(ctx, l, h)
 }
 

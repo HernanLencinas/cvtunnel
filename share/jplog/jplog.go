@@ -17,7 +17,6 @@ func New(w io.Writer) *slog.Logger {
 	return slog.New(Handler(w))
 }
 
-// JPHandler is jpillora's slog.Handler
 type JPHandler interface {
 	slog.Handler
 	// enabled verbose logging
